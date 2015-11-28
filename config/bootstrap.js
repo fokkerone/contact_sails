@@ -22,16 +22,16 @@ module.exports.bootstrap = function(cb) {
   **/
   var csv2json = function (callback, csvfile){
     var converter = new Converter({
-      noheader:true,                                      // true if firstline in csv isn´t the header row
-      headers:['name', 'gender', 'birthdate']             // header -> api/models/Contact.attributes
+      noheader:true,                                                            // true if firstline in csv isn´t the header row
+      headers:['name', 'gender', 'birthdate']                                   // header -> api/models/Contact.attributes
     });
 
     converter.on("error",function(errMsg,errData){
       return callback(errMsg);
     });
+
     //end_parsed will be emitted once parsing finished
     converter.on('end_parsed', function (jsonArray) {
-
       return callback("", jsonArray);
     });
 
@@ -46,10 +46,10 @@ module.exports.bootstrap = function(cb) {
   /**
   * Create Dummy Contacts from converted CSV File  *
   **/
-  var createContacts = function(err, contacts_obj){
+  var create_people = function(err, contacts_obj){
     if(err) return cb(err);
     sails.log.debug("Create Fixtures")
-    Contact.create( contacts_obj).exec(cb);
+    People.create(contacts_obj).exec(cb);
   }
 
   /**
@@ -58,7 +58,7 @@ module.exports.bootstrap = function(cb) {
   * @migrate: alter -global setting found in /config/models.js-
   * @DB-Adapter: localDiskDb
   **/
-  Contact.count().exec(function(err, count) {
+  People.count().exec(function(err, count) {
     if(err) {
       sails.log.error('Fixtures could not loaded');
       return cb(err);
@@ -71,7 +71,7 @@ module.exports.bootstrap = function(cb) {
 
     sails.log.debug('########################################################');
     sails.log.debug('##############  Import Fixtures ########################');
-    csv2json(createContacts, './fixtures/dummy.csv');
+    csv2json(create_people, './fixtures/dummy.csv');
   });
 
   // It's very important to trigger this callback method when you are finished
