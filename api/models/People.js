@@ -26,10 +26,21 @@ module.exports = {
     birthdate: {
       type: 'date',
       required: true
+    },
+
+    // Model Attribute Functions
+    getSomething: function(){
+      return moment( this.birthdate).locale('de').format('DDDD');
+    },
+
+    getBirthdateGap: function(date){
+      var birthdatePersonA = moment(date);
+      var birthdatePersonB = moment(this.birthdate)
+      return Math.abs( birthdatePersonB.diff(birthdatePersonA, 'days'))
     }
   },
 
-  //model validation messages definitions
+  /*########  Callbacks ##############*/
   validationMessages: {
     name: {
       required: 'Name is required'
@@ -44,12 +55,15 @@ module.exports = {
     }
   },
 
-  // Lifecycle Callbacks
+
+  /*########  Callbacks ##############
+  * Lifecycle callbacks are functions that are automagically called before or after certain model actions
+  **/
   beforeValidate: function (values, cb) {
     if (values.gender)
       values.gender = values.gender.toLowerCase();
     if (values.birthdate)
       values.birthdate = moment.utc(values.birthdate, "DD/MM/YY")._d;
     cb();
-  }
+  },
 };

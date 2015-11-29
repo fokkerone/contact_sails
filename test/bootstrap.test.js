@@ -3,6 +3,7 @@ var Sails = require('sails'),
 
 before(function(done) {
 
+  
   // Increase the Mocha timeout so that Sails has enough time to lift.
   this.timeout(5000);
 
@@ -18,5 +19,6 @@ before(function(done) {
 
 after(function(done) {
   // here you can clear fixtures, etc.
-  Sails.lower(done);
+  //Sails.lower(done);
+  done()
 });

@@ -1,0 +1,12 @@
+<h1>All Peoples</h1>
+
+<table>
+  <% peoples.forEach(function(people){ %>
+  <tr>
+    <td><%= people.id %></td>
+    <td><%= people.name %></td>
+    <td><%= people.birthdate %></td>
+    <td><%= people.getSomething() %></td>
+  </tr>
+  <% }); %>
+</table>

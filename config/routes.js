@@ -34,7 +34,29 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
+  },
+
+  '/questions': {
+      controller: 'QuestionsController',
+      action:     'index'
+  },
+
+  '/questions/1': {
+      controller: 'QuestionsController',
+      action:     'women'
+  },
+
+  '/questions/2': {
+      controller: 'QuestionsController',
+      action:     'oldest'
+  },
+
+  '/questions/3': {
+      controller: 'QuestionsController',
+      action:     'agegap'
   }
+
+
 
   /***************************************************************************
   *                                                                          *

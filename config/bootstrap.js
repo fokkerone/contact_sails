@@ -55,8 +55,8 @@ module.exports.bootstrap = function(cb) {
   /**
   * Import Fixture File to DB
   *
-  * @migrate: alter -global setting found in /config/models.js-
-  * @DB-Adapter: localDiskDb
+  * migrate: alter -global setting found in /config/models.js-
+  * DB-Adapter: localDiskDb
   **/
   People.count().exec(function(err, count) {
     if(err) {
