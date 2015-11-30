@@ -33,7 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {
-    view: 'questions/index'
+    view: 'homepage'
   },
 
   '/questions': {
@@ -43,17 +43,17 @@ module.exports.routes = {
 
   '/questions/1': {
       controller: 'QuestionsController',
-      action:     'getWomen'
+      action:     'women'
   },
 
   '/questions/2': {
       controller: 'QuestionsController',
-      action:     'getOldest'
+      action:     'oldest'
   },
 
   '/questions/3': {
       controller: 'QuestionsController',
-      action:     'getAgegap'
+      action:     'agegap'
   }
 
 

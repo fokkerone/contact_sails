@@ -1,8 +1,27 @@
-<h1>Found
-<% if (count) { %>
-    <%= count %>
-<% } %>
-
-<% if (gender) { %>
-    <%= gender %>s
-<% } %></h1>
+<div class="parallax filter-gradient blue" data-color="blue">
+  <div class="parallax-background">
+    <img class="parallax-background-image" src="/img/bkgd_seaweed.png">
+  </div>
+  <div class= "container">
+    <div class="row">
+      <div class="col-md-5 hidden-xs">
+        <div class="parallax-image">
+          <img class="" src="/img/image_devInTub.png" style="margin-top: 20px"/>
+        </div>
+      </div>
+      <div class="col-md-6 col-md-offset-1">
+        <div class="description">
+          <h2>How many women are in the address book?</h2>
+          <br>
+          <h5>1. <span><%= __n("%s woman", "%s women", count)%> </span>found in adressbook</h5>
+        </div>
+        <div class="buttons">
+          <a class="btn btn-fill btn-neutral" href="/questions">
+            <i class="fa fa-apple"></i>
+            Zum Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

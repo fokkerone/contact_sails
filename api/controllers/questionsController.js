@@ -104,7 +104,7 @@ module.exports = {
    *
    */
 
-  getWomen: function(request, response) {
+  women: function(request, response) {
     // Fetch user data
     dataService.getPeoplebyGender({}, function(error, found) {
         if (error) {
@@ -124,7 +124,7 @@ module.exports = {
    * @param   {Response}  response    Response object
    *
    */
-  getOldest: function(request, response) {
+  oldest: function(request, response) {
     // Fetch user data
     dataService.getOldestPeople({}, function(error, found) {
       if (error) {
@@ -144,7 +144,7 @@ module.exports = {
    * @param   {Response}  response    Response object
    *
    */
-  getAgegap: function(request, response) {
+  agegap: function(request, response) {
     console.log(request.query)
     if (!request.query.firstPerson && !request.query.secondPerson) _.extend(request.query, {firstPerson: "Paul Robinson", secondPerson: "Bill McKnight"})
     dataService.getAgeGapbetweenPeople(request.query, function(error, found) {

@@ -28,6 +28,11 @@ module.exports = {
       required: true
     },
 
+    birthdatereadable: function(date){
+
+      return moment(this.birthdate).format('DD MMMM YYYY')
+    },
+
     getBirthdateGap: function(date){
       var birthdatePersonA = moment(date);
       var birthdatePersonB = moment(this.birthdate)
