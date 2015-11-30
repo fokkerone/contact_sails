@@ -83,7 +83,6 @@ exports.getOldestPeople = function(options, next) {
  * @param   {Function}  next            Callback function to call after query
  */
 exports.getAgeGapbetweenPeople = function(options, next) {
-
   async.waterfall(
         [
             // Fetch task data

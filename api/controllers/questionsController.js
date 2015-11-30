@@ -14,109 +14,145 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-var async = require("async");
-var moment = require("moment");
-
+var async  = require("async");
 module.exports = {
-    /**
-     * Overrides for the settings in `config/controllers.js`
-     * (specific to ProjectController)
-     */
-    _config: {},
+  /**
+   * Overrides for the settings in `config/controllers.js`
+   * (specific to ProjectController)
+   */
+  _config: {},
 
-    /**
-     * Question index action. This will render a Dashboard GUI.
-     *
-     * @param   {Request}   request     Request object
-     * @param   {Response}  response    Response object
-     */
-     index: function(req, res) {
+  /**
+   * Question index action. This will render a Dashboard GUI.
+   *
+   * @param   {Request}   request     Request object
+   * @param   {Response}  response    Response object
+   */
+   index: function(req, res) {
 
-       // Make parallel jobs for task edit
-       async.parallel(
-         {
-           // Fetch task data
-           question1: function(callback) {
-             dataService.getPeoplebyGender({}, callback)
-           },
-           question2: function(callback) {
-             dataService.getOldestPeople({}, callback)
-           },
+    // Make parallel jobs for task edit
+    async.parallel(
+     {
+       // Fetch task data
+       question1: function(callback) {
+         dataService.getPeoplebyGender({}, callback)
+       },
+       question2: function(callback) {
+         dataService.getOldestPeople({}, callback)
+       },
 
-           question3: function(callback) {
-             dataService.getAgeGapbetweenPeople({firstPerson: "Paul Robinson", secondPerson: "Bill McKnight"}, callback)
-           }
-         },
-         /**
-         * Callback function which is called after all specified parallel jobs are done.
-         *
-         * @param   {null|Error}    error   Error object
-         * @param   {{
-         *              task: sails.model.task,
-         *              types: sails.model.type[],
-         *              users: sails.model.users[]
-         *          }}              data    Object that contains all necessary data for task edit
-         */
-         function(error, data) {
-           if (error) {
-             ResponseService.makeError(error, request, response);
-           } else {
-             console.log(data)
-             res.view(data);
-           }
-         }
-       );
+       question3: function(callback) {
+         dataService.getAgeGapbetweenPeople({firstPerson: "Paul Robinson", secondPerson: "Bill McKnight"}, callback)
+       }
      },
 
+     /**
+     * Callback function which is called after all specified parallel jobs are done.
+     *
+     * @param   {null|Error}    error   Error object
+     *          data    Object that contains all necessary data for Dashboard
+     * @param   {{
+     *              agegap: Number,
+     *              firstPerson: sails.model.People,
+     *              secondPerson: sails.model.People,
+     *          }}
+     */
+     function(error, data) {
+       if (error) {
+         ResponseService.makeError(error, request, response);
+       } else {
+         res.view(data);
+       }
+     }
+    );
+  },
 
-    all: function(request, response){
-      People
-      .find()
-      .exec( function(error, res) {
-          if (error){
-            sails.log.error(__filename + ":" + __line + " [Failed to fetch oldest People data]");
-            sails.log.error(error);
-          }
-          if(!res){
-            error = new Error();
-            error.message = "Nothing found"
-            error.status = 404;
-          }
-          response.view( {peoples:res} );
-      });
 
-    },
+  /**
+  * Question all action. This will render complete Contact List
+  *
+  * route: '/questions/all
+  *
+  * @param   {Request}   request     Request object
+  * @param   {Response}  response    Response object
+  */
+  all: function(request, response){
+    People
+    .find()
+    .exec( function(error, res) {
+        if (error){
+          sails.log.error(__filename + ":" + __line + " [Failed to fetch oldest People data]");
+          sails.log.error(error);
+        }
+        if(!res){
+          error = new Error();
+          error.message = "Nothing found"
+          error.status = 404;
+        }
+        response.view( {peoples:res} );
+    });
+  },
 
-    women: function(request, response) {
-      // Fetch user data
-      dataService.getPeoplebyGender({}, function(error, found) {
-          if (error) {
-              ResponseService.makeError(error, request, response);
-          } else {
-              response.view( found );
-          }
-      });
-    },
 
-    oldest: function(request, response) {
-      // Fetch user data
-      dataService.getOldestPeople({}, function(error, found) {
+  /**
+   * Question all action. This will render complete Contact List
+   *
+   * route: '/questions/1'
+   *
+   * @param   {Request}   request     Request object
+   * @param   {Response}  response    Response object
+   *
+   */
+
+  getWomen: function(request, response) {
+    // Fetch user data
+    dataService.getPeoplebyGender({}, function(error, found) {
         if (error) {
             ResponseService.makeError(error, request, response);
         } else {
-            response.view({people: found} );
+            response.view( found );
         }
-      });
-    },
+    });
+  },
 
-    agegap: function(request, response) {
-      dataService.getAgeGapbetweenPeople({firstPerson: "Paul Robinson", secondPerson: "Bill McKnight"}, function(error, found) {
-        if (error) {
-            ResponseService.makeError(error, request, response);
-        } else {
-            response.view(found);
-        }
-      });
-    }
+  /**
+   * Question all action. This will render complete Contact List
+   *
+   * route: '/questions/2'
+   *
+   * @param   {Request}   request     Request object
+   * @param   {Response}  response    Response object
+   *
+   */
+  getOldest: function(request, response) {
+    // Fetch user data
+    dataService.getOldestPeople({}, function(error, found) {
+      if (error) {
+          ResponseService.makeError(error, request, response);
+      } else {
+          response.view({people: found} );
+      }
+    });
+  },
 
+  /**
+   * Question all action. This will render complete Contact List
+   *
+   * route: '/questions/3'
+   *
+   * @param   {Request}   request     Request object
+   * @param   {Response}  response    Response object
+   *
+   */
+  getAgegap: function(request, response) {
+    console.log(request.query)
+    if (!request.query.firstPerson && !request.query.secondPerson) _.extend(request.query, {firstPerson: "Paul Robinson", secondPerson: "Bill McKnight"})
+    dataService.getAgeGapbetweenPeople(request.query, function(error, found) {
+      if (error) {
+          ResponseService.makeError(error, request, response);
+      } else {
+          response.view(found);
+      }
+    });
+  }
 };

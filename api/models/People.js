@@ -28,11 +28,6 @@ module.exports = {
       required: true
     },
 
-    // Model Attribute Functions
-    getSomething: function(){
-      return moment( this.birthdate).locale('de').format('DDDD');
-    },
-
     getBirthdateGap: function(date){
       var birthdatePersonA = moment(date);
       var birthdatePersonB = moment(this.birthdate)
