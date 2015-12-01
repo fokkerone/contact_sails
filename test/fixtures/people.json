@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Bill McKnight",
+    "gender": "male",
+    "birthdate": "16/03/77",
+    "createdAt": "2015-12-01T07:40:25.077Z",
+    "updatedAt": "2015-12-01T07:40:25.077Z",
+    "id": 1
+  },
+  {
+    "name": "Paul Robinson",
+    "gender": "male",
+    "birthdate": "15/01/85",
+    "createdAt": "2015-12-01T07:40:25.078Z",
+    "updatedAt": "2015-12-01T07:40:25.078Z",
+    "id": 2
+  },
+  {
+    "name": "Gemma Lane",
+    "gender": "female",
+    "birthdate": "20/11/91",
+    "createdAt": "2015-12-01T07:40:25.078Z",
+    "updatedAt": "2015-12-01T07:40:25.078Z",
+    "id": 3
+  }
+]

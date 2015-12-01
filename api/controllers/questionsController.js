@@ -145,7 +145,6 @@ module.exports = {
    *
    */
   agegap: function(request, response) {
-    console.log(request.query)
     if (!request.query.firstPerson && !request.query.secondPerson) _.extend(request.query, {firstPerson: "Paul Robinson", secondPerson: "Bill McKnight"})
     dataService.getAgeGapbetweenPeople(request.query, function(error, found) {
       if (error) {

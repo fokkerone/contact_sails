@@ -80,13 +80,21 @@ module.exports.connections = {
     user: 'YOUR_POSTGRES_USER',
     password: 'YOUR_POSTGRES_PASSWORD',
     database: 'YOUR_POSTGRES_DB'
-  }
+  },
 
+
+  /***************************************************************************
+  *                                                                          *
+  * For Mocha Tests                                                          *
+  *                                                                          *
+  ***************************************************************************/
+  test: {
+   adapter: 'sails-memory'
+  }
 
   /***************************************************************************
   *                                                                          *
   * More adapters: https://github.com/balderdashy/sails                      *
   *                                                                          *
   ***************************************************************************/
-
 };
