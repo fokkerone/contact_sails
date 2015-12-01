@@ -33,8 +33,9 @@ describe('All the People', function() {
       done();
     });
   });
+  
 
-  it ('One', function(done) {
+  it ('find One', function(done) {
     People
     .findOneById(1)
     .exec( function(error, res){
